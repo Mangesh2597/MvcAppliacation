@@ -18,7 +18,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.CodeAnalysis.Elfie.Extensions;
 using Microsoft.Extensions.Logging;
+using Mvc.DataAccess.Respository.IRepository;
 using Mvc.Model;
 using Mvc.Utility;
 
@@ -33,6 +35,7 @@ namespace MvcApplicationWeb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IUnitOfWork _un;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -40,8 +43,10 @@ namespace MvcApplicationWeb.Areas.Identity.Pages.Account
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUnitOfWork un)
         {
+            _un =un;
             _userManager = userManager;
             _roleManager = roleManager;
             _userStore = userStore;
@@ -117,6 +122,8 @@ namespace MvcApplicationWeb.Areas.Identity.Pages.Account
             public string? State { get; set; }
             public string? PostalCode { get; set; }
             public string? phoneNumber { get; set; }
+            public int? CompanyId { get; set; }
+            public IEnumerable<SelectListItem> CompanyList { get; set; }
 
         }
 
@@ -135,7 +142,13 @@ namespace MvcApplicationWeb.Areas.Identity.Pages.Account
                 {
                     Text=i,
                     Value=i
+                }),
+                CompanyList= _un.company.GetAll(includeProperties:null).Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value=i.Id.ToString()
                 })
+
             };
 
             ReturnUrl = returnUrl;
@@ -154,6 +167,15 @@ namespace MvcApplicationWeb.Areas.Identity.Pages.Account
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.Name= Input.Name;
                 user.CurrentAddress= Input.CurrentAddress;
+                user.City=Input.City;
+                user.State=Input.State;
+                user.PostalCode=Input.PostalCode;
+                user.PhoneNumber=Input.phoneNumber;
+                user.CurrentAddress= Input.CurrentAddress;
+                if(Input.Role==SD.Role_Company)
+                {
+                    user.CompanyId=Input.CompanyId;
+                }
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

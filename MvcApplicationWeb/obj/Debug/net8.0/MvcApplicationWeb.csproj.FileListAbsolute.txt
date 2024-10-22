@@ -778,3 +778,4 @@ C:\MVC\MvcAppliacation\MvcApplicationWeb\bin\Debug\net8.0\Microsoft.AspNetCore.I
 C:\MVC\MvcAppliacation\MvcApplicationWeb\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\MVC\MvcAppliacation\MvcApplicationWeb\bin\Debug\net8.0\Mvc.Utility.dll
 C:\MVC\MvcAppliacation\MvcApplicationWeb\bin\Debug\net8.0\Mvc.Utility.pdb
+C:\MVC\MvcAppliacation\MvcApplicationWeb\obj\Debug\net8.0\MvcApplicationWeb.sourcelink.json

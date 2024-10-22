@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\MVC\\MvcAppliacation\\MvcApplicationWeb\\wwwroot\\images\\lawn_leaf.jpg",
+      "PackagePath": "staticwebassets\\images\\lawn_leaf.jpg"
+    },
+    {
       "Id": "C:\\MVC\\MvcAppliacation\\MvcApplicationWeb\\wwwroot\\images\\product\\1ed94ea5-b190-4cc8-b91b-d6467e7ac0c5.jpg",
       "PackagePath": "staticwebassets\\images\\product\\1ed94ea5-b190-4cc8-b91b-d6467e7ac0c5.jpg"
     },
@@ -35,6 +39,14 @@
     {
       "Id": "C:\\MVC\\MvcAppliacation\\MvcApplicationWeb\\wwwroot\\images\\product\\bd0ad18a-a9be-4ae0-b4b5-1a0c26b4c295.jpg",
       "PackagePath": "staticwebassets\\images\\product\\bd0ad18a-a9be-4ae0-b4b5-1a0c26b4c295.jpg"
+    },
+    {
+      "Id": "C:\\MVC\\MvcAppliacation\\MvcApplicationWeb\\wwwroot\\js\\company.js",
+      "PackagePath": "staticwebassets\\js\\company.js"
+    },
+    {
+      "Id": "C:\\MVC\\MvcAppliacation\\MvcApplicationWeb\\wwwroot\\js\\order.js",
+      "PackagePath": "staticwebassets\\js\\order.js"
     },
     {
       "Id": "C:\\MVC\\MvcAppliacation\\MvcApplicationWeb\\wwwroot\\js\\product.js",

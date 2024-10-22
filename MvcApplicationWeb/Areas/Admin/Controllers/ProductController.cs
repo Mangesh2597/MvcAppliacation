@@ -24,7 +24,7 @@ namespace MvcApplicationWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> productList = _un.product.GetAll(includePoperties:"Category").ToList();
+            List<Product> productList = _un.product.GetAll(includeProperties:"Category").ToList();
 
             
             return View(productList);
@@ -36,7 +36,7 @@ namespace MvcApplicationWeb.Areas.Admin.Controllers
             {
 
                 CategoryList= _un.category
-                .GetAll(includePoperties:null).Select(u => new SelectListItem
+                .GetAll(includeProperties:null).Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString()
@@ -98,7 +98,7 @@ namespace MvcApplicationWeb.Areas.Admin.Controllers
             else
             {
 
-                productvm.CategoryList= _un.category.GetAll(includePoperties:"Category")
+                productvm.CategoryList= _un.category.GetAll(includeProperties:"Category")
                     .Select(u=>new SelectListItem
                     {
                         Text= u.Name,
@@ -149,7 +149,7 @@ namespace MvcApplicationWeb.Areas.Admin.Controllers
     [HttpGet]
     public IActionResult GetAll()
     {
-        List<Product> productList = _un.product.GetAll(includePoperties:"Category").ToList();
+        List<Product> productList = _un.product.GetAll(includeProperties:"Category").ToList();
         return Json(new{ data = productList});
     }
 

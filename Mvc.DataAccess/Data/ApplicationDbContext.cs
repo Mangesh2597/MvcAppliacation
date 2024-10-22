@@ -15,7 +15,11 @@ namespace Mvc.DataAccess.Data
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +29,13 @@ namespace Mvc.DataAccess.Data
                 new Category { Id =2, Name="SciFi", DisplayOrder=2 },
                 new Category { Id=3, Name ="History", DisplayOrder=3}
                 ) ;
+            modelBuilder.Entity<Company>().HasData(
+                new Company { Id=1, Name="HASBC", CurrentAddress="Chandni Chowk",City="Delhi", State="Delhi", PostalCode="123456", PhoneNumber="212332323" },
+                new Company { Id=2, Name="YTFD", CurrentAddress="BLR chowk", City="Bangalore", State="Karnaataka", PostalCode="765432", PhoneNumber="123456774" },
+                new Company { Id=3, Name="ETEED", CurrentAddress="MUM Chowk", City="Mumbai", State="Maharashtra", PostalCode="867654", PhoneNumber="234567" },
+                new Company { Id=4, Name="LTRD", CurrentAddress="IND Chowk", City="Indore", State="MadhyaPradesh", PostalCode="234432", PhoneNumber="2345654323" },
+                new Company { Id=5, Name="UJRD", CurrentAddress="KLK Chowk", City="Kolkata", State="WestBengal", PostalCode="345433", PhoneNumber="7787234342" }
+                );
 
             modelBuilder.Entity<Product>().HasData(
                 new Product

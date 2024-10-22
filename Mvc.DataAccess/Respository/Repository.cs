@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Mvc.DataAccess.Respository
 {
@@ -27,23 +28,40 @@ namespace Mvc.DataAccess.Respository
            dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter,string? includeProperties=null)
+        public T Get(Expression<Func<T, bool>> filter,string? includeProperties=null, bool tracked =false)
         {
-            IQueryable<T> query = dbSet;
-            query = query.Where(filter);
-            if(!string.IsNullOrEmpty(includeProperties))
+            IQueryable<T> query;
+            if (tracked)
             {
-                foreach(var includeProp in includeProperties.Split(new char[]{','},StringSplitOptions.RemoveEmptyEntries))
+                 query = dbSet;
+             
+            }
+            else
+            {
+                 query = dbSet.AsNoTracking();
+               
+            }
+            query = query.Where(filter);
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query=query.Include(includeProp);
                 }
             }
             return query.FirstOrDefault();
+
         }
 
-        public IEnumerable<T> GetAll(string? includeProperties)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter=null,string? includeProperties=null)
         {
             IQueryable<T> query = dbSet;
+            if(filter!=null)
+            {
+                query = query.Where(filter);
+
+            }
+
             if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
